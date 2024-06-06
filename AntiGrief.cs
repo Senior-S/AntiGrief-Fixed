@@ -42,9 +42,9 @@ namespace AntiGrief
 
         private void InteractableFarm_OnHarvestRequested_Global(InteractableFarm harvestable, SteamPlayer instigatorPlayer, ref bool shouldAllow)
         {
-            BarricadeRegion region = BarricadeManager.regions.Cast<BarricadeRegion>().FirstOrDefault(c => c.drops.Any(d => d.interactable.transform == harvestable.transform));
+            BarricadeRegion region = BarricadeManager.regions.Cast<BarricadeRegion>().FirstOrDefault(c => c.drops.Any(d => d.interactable == harvestable));
+            if (region == null) return;
             BarricadeDrop drop = region.drops.FirstOrDefault(c => c.interactable.transform == harvestable.transform);
-
             if (drop != null)
             {
                 BarricadeData data = drop.GetServersideData();
